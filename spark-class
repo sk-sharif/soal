@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Set Spark and Java paths
+JAVA_PATH=$(ls /usr/lib/jvm | grep java)
+SPARK_MEM="1g"
+
+# Set classpath to include PySpark, Hadoop and AWS SDK JARs
+CLASSPATH="/opt/spark/jars/*:/opt/spark/jars/hadoop-aws-3.3.0.jar:/opt/spark/jars/aws-java-sdk-1.11.901.jar"
+
+# Ensure Spark runs with the appropriate memory settings
+JVM_OPTIONS="-Xmx${SPARK_MEM} -Dspark.driver.memory=${SPARK_MEM}"
+
+# Start the Java process
+exec /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.412.b08-1.amzn2.0.1.x86_64/jre/bin/java $JVM_OPTIONS -cp $CLASSPATH "$@"
