@@ -49,6 +49,10 @@ RUN wget -P /opt/spark/jars https://repo1.maven.org/maven2/org/apache/hadoop/had
 # Install PySpark using pip
 RUN pip install pyspark==${SPARK_VERSION}
 
+# spark-class file is setting the memory to 1 GB
+COPY spark-class $SPARK_HOME/bin/
+RUN chmod -R 755 $SPARK_HOME
+
 # Set up the working directory for Lambda and copy the handler script
 COPY sparkLambdaHandler.py /var/task/
 

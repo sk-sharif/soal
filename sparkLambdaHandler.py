@@ -13,8 +13,9 @@ def lambda_handler(event, context):
             .appName("LambdaSparkExample") \
             .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
             .config("spark.hadoop.fs.s3a.endpoint", "s3.amazonaws.com") \
-	    .config("spark.hadoop.fs.s3a.aws.credentials.provider", "com.amazonaws.auth.DefaultAWSCredentialsProviderChain") \
+	        .config("spark.hadoop.fs.s3a.aws.credentials.provider", "com.amazonaws.auth.DefaultAWSCredentialsProviderChain") \
             .config("spark.executor.memory", "1g") \
+            .config("spark.driver.bindAddress", "127.0.0.1") \
             .config("spark.driver.memory", "1g") \
             .getOrCreate()
 
